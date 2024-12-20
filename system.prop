@@ -1,0 +1,7 @@
+# This file will be read by resetprop
+# Example: Change dpi
+# ro.sf.lcd_density=320
+# 启用调试模式
+ro.debuggable=1
+# 启用 ADB Root
+service.adb.root=1

@@ -1,0 +1,1 @@
+resetprop ro.debuggable 1
