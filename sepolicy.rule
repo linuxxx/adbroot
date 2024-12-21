@@ -1,35 +1,17 @@
+# Set permissive mode for key domains
 permissive { su }
 permissive { adbd }
-allow init adbd process2 nosuid_transition
-#userdebug_or_eng
-allow adbd adbd process setcurrent
-allow adbd su process dyntransition
-allow su * * *
-allow init overlayfs_file dir relabelfrom
-allow init overlayfs_file dir mounton
-allow init overlayfs_file dir write
-allow init overlayfs_file file append
-allow init system_block_device blk_file write
-allow fsck system_block_device blk_file ioctl
-allow fsck system_block_device blk_file read
-allow fsck system_block_device blk_file write
-allow fsck system_block_device blk_file getattr
-allow fsck system_block_device blk_file lock
-allow fsck system_block_device blk_file append
-allow fsck system_block_device blk_file map
-allow fsck system_block_device blk_file open
-allow fsck system_block_device blk_file watch
-allow fsck system_block_device blk_file watch_reads
-# ADB over network permissions
+permissive { system_server }
+permissive { zygote }
+permissive { platform_app }
+permissive { system_app }
+
+# Keep basic network permissions
 allow adbd node_type:tcp_socket node_bind
 allow adbd port:tcp_socket name_bind
 allow adbd self:tcp_socket { create bind accept listen read write getopt setopt }
 allow adbd self:capability net_raw
 allow adbd net_raw_device:chr_file rw_file_perms
-# Allow adbd to use network properties
 allow adbd property_socket:sock_file write
 allow adbd property_type:property_service set
 allow adbd net_radio_prop:property_service set
-# Network access for adbd
-allow adbd node_type:tcp_socket node_connect
-allow adbd port:tcp_socket name_connect
