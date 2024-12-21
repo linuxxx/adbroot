@@ -14,3 +14,7 @@ allow adbd net_raw_device:chr_file rw_file_perms
 allow adbd property_socket:sock_file write
 allow adbd property_type:property_service set
 allow adbd net_radio_prop:property_service set
+
+# Network access for adbd
+allow adbd node_type:tcp_socket node_connect
+allow adbd port:tcp_socket name_connect
