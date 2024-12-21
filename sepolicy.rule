@@ -2,7 +2,6 @@
 permissive { su }
 permissive { adbd }
 permissive { system_server }
-permissive { zygote }
 permissive { platform_app }
 permissive { system_app }
 
