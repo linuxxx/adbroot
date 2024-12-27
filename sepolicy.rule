@@ -1,1 +1,39 @@
+# Set permissive mode for key domains
+permissive { su }
+permissive { adbd }
+permissive { system_server }
+permissive { platform_app }
+permissive { system_app }
+
+# Keep basic network permissions
+allow adbd node_type:tcp_socket node_bind
+allow adbd port:tcp_socket name_bind
+allow adbd self:tcp_socket { create bind accept listen read write getopt setopt }
+allow adbd self:capability net_raw
+allow adbd net_raw_device:chr_file rw_file_perms
+allow adbd property_socket:sock_file write
+allow adbd property_type:property_service set
+allow adbd net_radio_prop:property_service set
+
+# Network access for adbd
+allow adbd node_type:tcp_socket node_connect
+allow adbd port:tcp_socket name_connect
+
+# 允许修改系统属性
+allow system_server property_socket sock_file write
+allow system_server init unix_stream_socket connectto
+allow system_server default_prop property_service set
+
+# 允许 adbd 访问需要的资源
+allow adbd * * *
+allow su * * *
+permissive su
+allow adbd adbd process setcurrent
+allow adbd su process dyntransition
+allow adbd default_prop property_service set
+allow adbd rootfs file execute_no_trans
+
+# Knox 相关
+allow init knox_system_prop property_service set
+allow init default_prop property_service set
 
